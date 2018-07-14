@@ -3,7 +3,11 @@ services:
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: "example"
+      MYSQL_ROOT_PASSWORD: "tripmap"
+      MYSQL_USER: "tripmap"
+      MYSQL_PASSWORD: "tripmap"
+      MYSQL_DATABASE: "tripmap"
+      MYSQL_ROOT_HOST: "%"
     volumes:
       - db-data:/var/lib/mysql
 
@@ -26,9 +30,9 @@ services:
       TM_DB_CONNECTION: "mysql"
       TM_DB_HOST: "db"
       TM_DB_PORT: "3306"
-      TM_DB_NAME: "root"
-      TM_DB_USER: "root"
-      TM_DB_PASSWORD: "example"
+      TM_DB_NAME: "tripmap"
+      TM_DB_USER: "tripmap"
+      TM_DB_PASSWORD: "tripmap"
       
     volumes:
       - ./src:/var/www/tripmap

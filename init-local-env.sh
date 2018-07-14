@@ -1,6 +1,6 @@
 #!/bin/bash
 
-$PROJECT_PATH="$(pwd)/src"
+PROJECT_PATH="$(pwd)/src"
 
 echo "Install dependencies ..."
 sudo docker run --rm -v "${PROJECT_PATH}":/app composer/composer install

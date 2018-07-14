@@ -36,3 +36,12 @@ COPY ./.deploy/docker/apache-tripmap.conf /etc/apache2/sites-available/000-defau
 
 # Expose port 80
 EXPOSE 80
+
+# Set workdir
+WORKDIR /var/www/tripmap
+
+# Run entrypoint
+ADD ./.deploy /tmp/deploy
+RUN chown -R www-data:www-data /tmp/deploy && \
+    chmod -R 700 /tmp/deploy
+ENTRYPOINT ["/tmp/deploy/docker/entrypoint.sh"]
