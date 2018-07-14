@@ -1,0 +1,49 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "example"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    depends_on:
+      - db
+
+  tripmap:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    environment:
+      TM_APP_ENV: "local"
+      TM_APP_KEY: "_changeThisToRealKeyWith32Chars_"
+      TM_APP_DEBUG: "true"
+      TM_APP_LOG_LEVEL: "debug"
+      TM_APP_URL: "http://tripmap.tripmap.localhost"
+      
+      TM_DB_CONNECTION: "mysql"
+      TM_DB_HOST: "db"
+      TM_DB_PORT: "3306"
+      TM_DB_NAME: "root"
+      TM_DB_USER: "root"
+      TM_DB_PASSWORD: "example"
+      
+    volumes:
+      - ./src:/var/www/tripmap
+    depends_on:
+      - db
+
+  proxy:
+    image: haproxy:1.8-alpine
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - 80:80
+    depends_on:
+      - phpmyadmin
+      - tripmap
+
+volumes:
+  db-data:
