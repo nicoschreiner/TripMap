@@ -6,7 +6,7 @@
 
 
 
-        <div id="map" style="width: 100%; height: calc(100vh - 56px); margin-top: 56px;"></div>
+        <div id="map" style="width: 100%; height: calc(100vh - 56px);"></div>
         <script>
           var map;
           function initMap() {
