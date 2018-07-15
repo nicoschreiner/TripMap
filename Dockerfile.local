@@ -41,7 +41,7 @@ EXPOSE 80
 WORKDIR /var/www/tripmap
 
 # Run entrypoint
-ADD ./.deploy /tmp/deploy
-RUN chown -R www-data:www-data /tmp/deploy && \
-    chmod -R 700 /tmp/deploy
-ENTRYPOINT ["/tmp/deploy/docker/entrypoint.sh"]
+#ADD ./.deploy /tmp/deploy
+#RUN chown -R www-data:www-data /tmp/deploy && \
+#    chmod -R 700 /tmp/deploy
+#ENTRYPOINT ["/tmp/deploy/docker/entrypoint.sh"]
