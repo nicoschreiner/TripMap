@@ -10,7 +10,9 @@ class Trip extends Model
     use SoftDeletes;
     
     protected $dates = [
-        'deleted_at'
+        'beginn',
+        'end',
+        'deleted_at',
     ];
 
     // -----------------------
@@ -18,7 +20,7 @@ class Trip extends Model
     // -----------------------
 
     public function user() {
-        return $this->belongsTo(App\User::class);
+        return $this->belongsTo(\App\User::class);
     }
 
 }

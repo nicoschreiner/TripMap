@@ -19,6 +19,8 @@ class CreateTripsTable extends Migration
 
             $table->string('name');
             $table->text('description');
+            $table->date('beginn')->nullable();
+            $table->date('end')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

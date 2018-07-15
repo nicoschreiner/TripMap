@@ -1,5 +1,6 @@
 
 window._ = require('lodash');
+window.Popper = require('popper.js').default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -10,7 +11,7 @@ window._ = require('lodash');
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap-sass');
+    require('bootstrap');
 } catch (e) {}
 
 /**
@@ -53,3 +54,17 @@ if (token) {
 //     cluster: 'mt1',
 //     encrypted: true
 // });
+
+/* Date Range Picker */
+window.moment = require('moment');
+require('daterangepicker');
+
+/* FontAwesome */
+import fontawesome from '@fortawesome/fontawesome';
+import solid from '@fortawesome/fontawesome-free-solid';
+import regular from '@fortawesome/fontawesome-free-regular';
+import brands from '@fortawesome/fontawesome-free-brands';
+
+fontawesome.library.add(solid);
+fontawesome.library.add(regular);
+fontawesome.library.add(brands);
