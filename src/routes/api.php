@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+/* Trips */
+Route::prefix('trips')->name('trips.')->group(function() {
+	/* Steps */
+	Route::prefix('{trip}/steps')->name('steps.')->group(function() {
+		// Index
+		Route::get('/', 'Api\TripStepsController@index')->name('index');
+	});
 });

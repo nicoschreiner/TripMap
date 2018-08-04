@@ -32,7 +32,7 @@ class TripsController extends Controller
     {
         $this->authorize('update', $trip);
 
-        return view('trips.create');
+        return view('trips.edit', compact('trip'));
     }
 
     public function store(Request $request)
@@ -47,6 +47,23 @@ class TripsController extends Controller
         $trip = new Trip();
 
         $trip->user_id     = Auth::id();
+        $trip->name        = $request->name;
+        $trip->description = $request->description;
+
+        $trip->save();
+
+        return redirect()->route('trips.index');
+    }
+
+    public function update(Request $request, Trip $trip)
+    {
+        $this->authorize('update', $trip);
+
+        $request->validate([
+            'name'        => 'bail|required|max:64|string',
+            'description' => 'bail|required|max:2048|string',
+        ]);
+
         $trip->name        = $request->name;
         $trip->description = $request->description;
 

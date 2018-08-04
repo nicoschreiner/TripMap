@@ -15,9 +15,25 @@ Auth::routes();
 
 Route::get('/', 'DashboardController@index')->name('dashboard');
 
-Route::get('/trips', 'TripsController@index')->name('trips.index');
-Route::get('/trips/create', 'TripsController@create')->name('trips.create');
-Route::get('/trips/{trip}/edit', 'TripsController@edit')->name('trips.edit');
+/* Trips */
+Route::prefix('trips')->name('trips.')->group(function() {
+	// Index
+	Route::get('/', 'TripsController@index')->name('index');
 
-Route::post('/trips', 'TripsController@store')->name('trips.store');
-Route::delete('/trips/{trip}', 'TripsController@destroy')->name('trips.delete');
+	// Create
+	Route::get('/create', 'TripsController@create')->name('create');
+	Route::post('/', 'TripsController@store')->name('store');
+
+	// Edit
+	Route::get('/{trip}/edit', 'TripsController@edit')->name('edit');
+	Route::patch('/{trip}', 'TripsController@update')->name('update');
+
+	// Delete
+	Route::delete('/{trip}', 'TripsController@destroy')->name('delete');
+
+	/* Steps */
+	Route::prefix('{trip}/steps')->name('steps.')->group(function() {
+		// Create
+		Route::post('/', 'TripsController@store')->name('store');
+	});
+});

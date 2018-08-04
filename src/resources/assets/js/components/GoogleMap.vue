@@ -40,8 +40,9 @@
                 this.lat = data.latLng.lat();
                 this.lng = data.latLng.lng();
 
-                let x = data.pixel.x;
-                let y = data.pixel.y;
+                let position = $(this.$el).position();
+                let x = position.left + data.pixel.x;
+                let y = position.top + data.pixel.y;
 
                 this.showContextMenu(x, y);
             },

@@ -14,4 +14,8 @@ return [
         'description'   => 'Description',
     ],
 
+    'actions' => [
+        'add-step'      => 'Add Step',
+    ],
+
 ];

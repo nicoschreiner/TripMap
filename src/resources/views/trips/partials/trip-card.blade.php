@@ -9,12 +9,12 @@
                     <div class="row">
                         @can('update', $trip)
                             <div class="col text-left">
-                                <a href="{{ route('trips.edit', ['trip' => $trip]) }}" class="btn btn-primary">@lang('strings.edit')</a>
+                                <a href="{{ route('trips.edit', $trip) }}" class="btn btn-primary">@lang('strings.edit')</a>
                             </div>
                         @endcan
                         @can('delete', $trip)
                             <div class="col text-right">
-                                <form action="{{ route('trips.delete', ['trip' => $trip]) }}" method="POST" class="d-inline ml-2">
+                                <form action="{{ route('trips.delete', $trip) }}" method="POST" class="d-inline ml-2">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
@@ -30,13 +30,13 @@
                     @isset($trip->beginn)
                         {{ $trip->beginn->format(__('formats.date')) }}
                     @else
-                        unknown
+                        @lang('strings.unknown')
                     @endisset
                     -
                     @isset($trip->end)
                         {{ $trip->end->format(__('formats.date')) }}
                     @else
-                        unknown
+                        @lang('strings.unknown')
                     @endisset
 
                     Steps: {{ $trip->steps_count }}
