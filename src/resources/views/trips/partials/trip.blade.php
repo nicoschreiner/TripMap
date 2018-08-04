@@ -9,7 +9,7 @@
                     <div class="row">
                         @can('update', $trip)
                             <div class="col text-left">
-                                <a href="{{ route('trips.edit', ['trip' => $trip]) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('trips.edit', ['trip' => $trip]) }}" class="btn btn-primary">@lang('strings.edit')</a>
                             </div>
                         @endcan
                         @can('delete', $trip)
@@ -18,7 +18,7 @@
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
 
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="submit" class="btn btn-danger">@lang('strings.delete')</button>
                                 </form>
                             </div>
                         @endcan
@@ -28,16 +28,18 @@
             <div class="card-footer">
                 <small class="text-muted">
                     @isset($trip->beginn)
-                        {{ $trip->beginn->format("m/d/Y") }}
+                        {{ $trip->beginn->format(__('formats.date')) }}
                     @else
                         unknown
                     @endisset
                     -
                     @isset($trip->end)
-                        {{ $trip->end->format("m/d/Y") }}
+                        {{ $trip->end->format(__('formats.date')) }}
                     @else
                         unknown
                     @endisset
+
+                    Steps: {{ $trip->steps_count }}
                 </small>
             </div>
         </div>

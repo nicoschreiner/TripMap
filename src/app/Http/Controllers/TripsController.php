@@ -16,7 +16,7 @@ class TripsController extends Controller
 
     public function index()
     {
-        $trips = Auth::user()->trips()->get();
+        $trips = Auth::user()->trips()->withCount('steps')->get();
 
         return view('trips.index', compact('trips'));
     }
@@ -40,10 +40,8 @@ class TripsController extends Controller
         $this->authorize('create', Trip::class);
 
         $request->validate([
-            'name'        => 'bail|required|max:255|string',
-            'description' => 'bail|required|max:4096|string',
-            'beginn'      => 'bail|nullable|date',
-            'end'         => 'bail|nullable|date',
+            'name'        => 'bail|required|max:64|string',
+            'description' => 'bail|required|max:2048|string',
         ]);
 
         $trip = new Trip();
@@ -51,8 +49,6 @@ class TripsController extends Controller
         $trip->user_id     = Auth::id();
         $trip->name        = $request->name;
         $trip->description = $request->description;
-        $trip->beginn      = $request->beginn;
-        $trip->end         = $request->end;
 
         $trip->save();
 

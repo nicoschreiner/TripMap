@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/', 'DashboardController@index')->name('dashboard');
 
 Route::get('/trips', 'TripsController@index')->name('trips.index');
 Route::get('/trips/create', 'TripsController@create')->name('trips.create');
